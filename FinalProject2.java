@@ -34,15 +34,23 @@ public class FinalProject2{
 			//main loop:
 			while(scan.hasNext()) {
 
-				String[] data = scan.nextLine().split(", ");
+				String[] data = scan.nextLine().split(",");
 
+				/*for(int i = 0; i < data.length; i++){
+					System.out.println(data[i]);
+				}*/
+				
+				if(data[4].equals("")){
+					data[4] = "0";
+				}
+				
 				TweetCats t = new TweetCats();
 				t.num = Integer.parseInt(data[0]);
 				t.timeSent = data[1];
 				t.id = Long.parseLong(data[2]);
 				t.replyToUserID = Long.parseLong(data[3]);
-				t.isRetweet = Boolean.parseBoolean(data[4]);
-				t.retweetCount = Integer.parseInt(data[5]);
+				t.retweetCount = (int) Double.parseDouble(data[4]);
+				t.isRetweet = Boolean.parseBoolean(data[5]);
 				t.source = data[6];
 				t.text = data[7];
 
@@ -58,6 +66,8 @@ public class FinalProject2{
 	}
 	
 	public static void main(String[] args){
+		TweetCats[] j = fillArray();
 		
+		System.out.println(j[0].num);
 	}
 }
