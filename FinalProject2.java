@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Random;
 
 class TweetCats{//short for tweet categories
 
@@ -39,11 +40,11 @@ public class FinalProject2{
 				/*for(int i = 0; i < data.length; i++){
 					System.out.println(data[i]);
 				}*/
-				
+
 				if(data[4].equals("")){
 					data[4] = "0";
 				}
-				
+
 				TweetCats t = new TweetCats();
 				t.num = Integer.parseInt(data[0]);
 				t.timeSent = data[1];
@@ -64,10 +65,74 @@ public class FinalProject2{
 		}
 		return new  TweetCats[0];
 	}
-	
+
 	public static void main(String[] args){
 		TweetCats[] j = fillArray();
-		
+		Random ran = new Random();
+		int i = ran.nextInt(5000);
 		System.out.println(j[0].num);
+
+		System.out.println(secondsSince(i, j));
+	}
+
+	public static double secondsSince(int i, TweetCats[] j){
+		double secondsSince = 0.00;
+		double daysToMonth = 0;
+		double daysToYear = 0;
+
+		String[] bigTsmallT = j[i].timeSent.split(" ");
+		String[] bigTime = bigTsmallT[0].split("-");
+		String[] smallTime = bigTsmallT[1].split(":");
+		ArrayList<Double> time = new ArrayList();
+
+		for(int z = 0; z < bigTime.length; z++){
+			time.add(Double.parseDouble(bigTime[z]));
+		}//convert times to ints
+		for(int z = 0; z < smallTime.length; z++){
+			time.add(Double.parseDouble(smallTime[z]));
+		}//convert string times to ints
+
+		if(time.get(1) == 1){
+			daysToMonth = 0;
+		}
+		else if(time.get(1) == 2){
+			daysToMonth = 31;
+		}
+		else if(time.get(1) == 3){
+			daysToMonth = 59;
+		}
+		else if(time.get(1) == 4){
+			daysToMonth = 90;
+		}
+		else if(time.get(1) == 5){
+			daysToMonth = 120;
+		}
+		else if(time.get(1) == 6){
+			daysToMonth = 151;
+		}
+		else if(time.get(1) == 7){
+			daysToMonth = 181;
+		}
+		else if(time.get(1) == 8){
+			daysToMonth = 212;
+		}
+		else if(time.get(1) == 9){
+			daysToMonth = 243;
+		}
+		else if(time.get(1) == 10){
+			daysToMonth = 273;
+		}
+		else if(time.get(1) == 11){
+			daysToMonth = 304;
+		}
+		else if(time.get(1) == 12){
+			daysToMonth = 334;
+		}//calculate months
+		
+		secondsSince = ((time.get(0) - 2009)*365) + (daysToMonth) + (time.get(2)) + (time.get(3)/24) + (time.get(4)/1440) + (time.get(5)/86400);
+		
+		System.out.println("i = "+i);
+
+		return secondsSince;
 	}
 }
