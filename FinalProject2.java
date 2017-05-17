@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
+import java.awt.Color;
+import org.dalton.DaltonDraw;
 
 class TweetCats{//short for tweet categories
 
@@ -72,10 +74,21 @@ public class FinalProject2{
 		int i = ran.nextInt(5000);
 		System.out.println(j[0].num);
 
-		System.out.println(secondsSince(i, j));
+		DaltonDraw draw = new DaltonDraw();
+		
+		draw.drawRect(1, 500, 50, 50, 0, Color.BLACK);
+		draw.drawRect(1, 500, 300, 300, 90, Color.BLACK);
+		
+		for(int r = 0; r < 30794; r++){
+			
+		}
+		
+		draw.render();
+		
+		System.out.println(daysSince(i, j));
 	}
 
-	public static double secondsSince(int i, TweetCats[] j){
+	public static double daysSince(int i, TweetCats[] j){
 		double secondsSince = 0.00;
 		double daysToMonth = 0;
 		double daysToYear = 0;
@@ -129,10 +142,22 @@ public class FinalProject2{
 			daysToMonth = 334;
 		}//calculate months
 		
-		secondsSince = ((time.get(0) - 2009)*365) + (daysToMonth) + (time.get(2)) + (time.get(3)/24) + (time.get(4)/1440) + (time.get(5)/86400);
+		secondsSince = ((time.get(0)*365) + (daysToMonth) + (time.get(2)) + (time.get(3)/24) + (time.get(4)/1440) + (time.get(5)/86400)) - 733409.75;
 		
 		System.out.println("i = "+i);
 
 		return secondsSince;
+	}
+	public static double calcWeek(int i, TweetCats[] j){
+		double week = 0;
+		double day;
+		
+		day = daysSince(i, j);
+		
+		day -= (day%7);
+		
+		week = day/7;
+		
+		return week;
 	}
 }
