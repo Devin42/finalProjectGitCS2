@@ -73,9 +73,12 @@ public class FinalProject2{
 		Random ran = new Random();
 		int i = ran.nextInt(5000);
 		System.out.println(j[0].num);
-
+		int xCoord = 0;
+		int yCoord = 0;
+		
 		DaltonDraw draw = new DaltonDraw();
 		
+		//origin of this graph at 50, 550
 		draw.drawRect(1, 500, 50, 50, 0, Color.BLACK);
 		draw.drawRect(1, 500, 300, 300, 90, Color.BLACK);
 		
@@ -83,9 +86,25 @@ public class FinalProject2{
 			
 		}
 		
+		//draw.render();
+	
+		System.out.println("Graphing Please Wait!");
+		for(int m = 0; m < 415.0; m++){
+			xCoord = m+50;
+			yCoord = 550 - (yCoordinate(m, j));
+			draw.drawRect(2, 2, xCoord, yCoord, 0, Color.BLACK);
+			System.out.println("("+xCoord+", "+yCoord+")");
+		}
+		
 		draw.render();
 		
+		
+		
+		/*
 		System.out.println(daysSince(i, j));
+		System.out.println(calcWeek(30195, j));
+		System.out.println(yCoordinate(171.0, j));
+		*/
 	}
 
 	public static double daysSince(int i, TweetCats[] j){
@@ -144,7 +163,7 @@ public class FinalProject2{
 		
 		secondsSince = ((time.get(0)*365) + (daysToMonth) + (time.get(2)) + (time.get(3)/24) + (time.get(4)/1440) + (time.get(5)/86400)) - 733409.75;
 		
-		System.out.println("i = "+i);
+		//System.out.println("i = "+i);
 
 		return secondsSince;
 	}
@@ -159,5 +178,16 @@ public class FinalProject2{
 		week = day/7;
 		
 		return week;
+	}
+	public static int yCoordinate(double week, TweetCats[] j){
+		int yCoord = 0;
+				
+		for(int i = 0; i < j.length; i++){
+			if(calcWeek(i, j) == week){
+				yCoord++;
+			}
+		}
+		
+		return yCoord;
 	}
 }
