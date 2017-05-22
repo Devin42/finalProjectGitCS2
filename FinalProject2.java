@@ -81,6 +81,10 @@ public class FinalProject2{
 		//origin of this graph at 50, 550
 		draw.drawRect(1, 500, 50, 50, 0, Color.BLACK);
 		draw.drawRect(1, 500, 300, 300, 90, Color.BLACK);
+		for(int y = 540; y > 100.0; y -= 20){
+			draw.drawRect(3, 1, 47, y, 0, Color.BLACK);
+			draw.drawString(""+(550-y), 20, y+5, 15, Color.BLACK);
+		}
 		
 		for(int r = 0; r < 30794; r++){
 			
