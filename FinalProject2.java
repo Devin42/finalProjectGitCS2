@@ -77,7 +77,7 @@ public class FinalProject2{
 		
 		DaltonDraw draw = new DaltonDraw();
 		
-		draw.drawString("Graphing Please Wait!",30, 300, 50, Color.BLACK);
+		draw.drawString("Graphing Please Wait!",70, 300, 50, Color.BLACK);
 		draw.render();//tells user to wait
 		draw.clear();//preps message to be cleared when the graph is ready.
 
