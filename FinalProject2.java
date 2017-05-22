@@ -72,11 +72,15 @@ public class FinalProject2{
 		TweetCats[] j = fillArray();
 		Random ran = new Random();
 		int i = ran.nextInt(5000);
-		System.out.println(j[0].num);
 		int xCoord = 0;
 		int yCoord = 0;
 		
 		DaltonDraw draw = new DaltonDraw();
+		
+		draw.drawString("Graphing Please Wait!",30, 300, 50, Color.BLACK);
+		draw.render();//tells user to wait
+		draw.clear();//preps message to be cleared when the graph is ready.
+
 		
 		//origin of this graph at 50, 550
 		draw.drawRect(1, 500, 50, 50, 0, Color.BLACK);
@@ -97,7 +101,7 @@ public class FinalProject2{
 			xCoord = m+50;
 			yCoord = 550 - (yCoordinate(m, j));
 			draw.drawRect(2, 2, xCoord, yCoord, 0, Color.BLACK);
-			System.out.println("("+xCoord+", "+yCoord+")");
+			//System.out.println("("+xCoord+", "+yCoord+")");
 		}
 		
 		draw.render();
