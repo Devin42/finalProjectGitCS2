@@ -74,45 +74,64 @@ public class FinalProject2{
 		int i = ran.nextInt(5000);
 		int xCoord = 0;
 		int yCoord = 0;
-		
+
 		DaltonDraw draw = new DaltonDraw();
+		
+		int tweetWeek = tweetWeek(j);
+		System.out.println("As you can see "+tweetWeek+ " had by far the most tweets with "+ yCoordinate(tweetWeek, j)+" tweets!");
+		
 		
 		draw.drawString("Graphing Please Wait!",70, 300, 50, Color.BLACK);
 		draw.render();//tells user to wait
 		draw.clear();//preps message to be cleared when the graph is ready.
 
-		
+
 		//origin of this graph at 50, 550
-		draw.drawRect(1, 500, 50, 50, 0, Color.BLACK);
-		draw.drawRect(1, 500, 300, 300, 90, Color.BLACK);
-		for(int y = 540; y > 100.0; y -= 20){
-			draw.drawRect(3, 1, 47, y, 0, Color.BLACK);
-			draw.drawString(""+(550-y), 20, y+5, 15, Color.BLACK);
+		draw.drawRect(1, 500, 100, 50, 0, Color.BLACK);
+		draw.drawRect(1, 500, 350, 300, 90, Color.BLACK);
+		for(int y = 540; y > 100.0; y -= 5){
+			if((540-y)%20 != 0){
+				draw.drawRect(3, 1, 97, y, 0, Color.BLACK);
+			}
+			else if((540-y)%20 == 0){
+				draw.drawRect(10, 1, 90, y, 0, Color.BLACK);
+				draw.drawString(""+(550-y), 60, y+5, 15, Color.BLACK);
+			}
 		}
-		
-		for(int r = 0; r < 30794; r++){
-			
+		for(int x = 105; x < 550; x += 5){
+			if((x-105)%20 != 0){
+				draw.drawRect(1, 3, x, 550, 0, Color.BLACK);
+			}
+			else if((x-105)%20 == 0){
+				draw.drawRect(1, 10, x, 550, 0, Color.BLACK);
+				draw.drawString(""+(x-105), x-7, 570, 10, Color.BLACK);
+			}
 		}
-		
+
+
 		//draw.render();
-	
+
 		System.out.println("Graphing Please Wait!");
 		for(int m = 0; m < 415.0; m++){
-			xCoord = m+50;
+			xCoord = m+100;
 			yCoord = 550 - (yCoordinate(m, j));
 			draw.drawRect(2, 2, xCoord, yCoord, 0, Color.BLACK);
 			//System.out.println("("+xCoord+", "+yCoord+")");
 		}
 		
+		draw.drawString("Week Since First Tweet", 250, 600, 15, Color.BLACK);
+		draw.drawString("Number", 5, 300, 15, Color.BLACK);
+		draw.drawString("of", 20, 320, 15, Color.BLACK);
+		draw.drawString("Tweets", 7, 340, 15, Color.BLACK);
 		draw.render();
+
 		
-		
-		
+
 		/*
 		System.out.println(daysSince(i, j));
 		System.out.println(calcWeek(30195, j));
 		System.out.println(yCoordinate(171.0, j));
-		*/
+		 */
 	}
 
 	public static double daysSince(int i, TweetCats[] j){
@@ -168,9 +187,9 @@ public class FinalProject2{
 		else if(time.get(1) == 12){
 			daysToMonth = 334;
 		}//calculate months
-		
+
 		secondsSince = ((time.get(0)*365) + (daysToMonth) + (time.get(2)) + (time.get(3)/24) + (time.get(4)/1440) + (time.get(5)/86400)) - 733409.75;
-		
+
 		//System.out.println("i = "+i);
 
 		return secondsSince;
@@ -178,24 +197,42 @@ public class FinalProject2{
 	public static double calcWeek(int i, TweetCats[] j){
 		double week = 0;
 		double day;
-		
+
 		day = daysSince(i, j);
-		
+
 		day -= (day%7);
-		
+
 		week = day/7;
-		
+
 		return week;
 	}
 	public static int yCoordinate(double week, TweetCats[] j){
 		int yCoord = 0;
-				
+
 		for(int i = 0; i < j.length; i++){
 			if(calcWeek(i, j) == week){
 				yCoord++;
 			}
 		}
-		
+
 		return yCoord;
+	}
+	public static int tweetWeek(TweetCats[] j){
+		int tweetWeek = 0;
+		
+		//ArrayList<Integer> mostWeek = new ArrayList();
+		
+		//System.out.println("Starting the funtion! YEA");
+		//415.0 is the total number of weeks since trumps first tweet
+		for(int i = 0; i <= 415.0; i++){
+				if(yCoordinate(i, j) > yCoordinate(tweetWeek, j)){
+					tweetWeek = i;
+					//System.out.println("In the loop!");
+			}//checks if the array list contains anything larger than the value of the week under question and if it does it replaces that as the "reigning" tweetWeek
+			System.out.println("i ="+ i);
+		}
+		
+		//System.out.println("Function Complete!");
+		return tweetWeek;
 	}
 }
