@@ -107,7 +107,6 @@ public class FinalProject2{
 
 
 		draw.drawString("Graphing Please Wait!",70, 300, 50, Color.BLACK);
-		draw.drawString("(this will take about 50 seconds)", 40, 350, 50, Color.BLACK);
 		draw.render();//tells user to wait
 		draw.clear();//preps message to be cleared when the graph is ready.
 
@@ -145,7 +144,7 @@ public class FinalProject2{
 
 
 		// Report findings
-		draw.drawString("As you can see "+tweetWeek+ " had by far the most tweets with "+ yCoordinate(tweetWeek, j)+" tweets!", 500, 20, 15, Color.BLACK);
+		draw.drawString("As you can see "+tweetWeek+ " had by far the most tweets with "+ yCoordinate(tweetWeek, j)+" tweets!", 500, 50, 15, Color.BLACK);
 		draw.drawString("Week Since First Tweet", 250, 600, 15, Color.BLACK);
 		draw.drawString("Number", 5, 300, 15, Color.BLACK);
 		draw.drawString("of", 20, 320, 15, Color.BLACK);
@@ -162,6 +161,7 @@ public class FinalProject2{
 		System.out.println("What word would you like to search for?");
 		String word = scan.nextLine();
 		occurence.drawString("Graphing Please Wait!",70, 300, 50, Color.BLACK);
+		draw.drawString("(this will take about 50 seconds)", 40, 350, 50, Color.BLACK);
 		occurence.render();
 		occurence.clear();
 		
