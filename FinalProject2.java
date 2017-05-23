@@ -77,6 +77,11 @@ public class FinalProject2{
 
 		DaltonDraw draw = new DaltonDraw();
 		
+		
+		draw.drawString("Please Wait Making", 120, 250, 40, Color.BLACK);
+		draw.drawString("Precoursory Calculations", 90, 300, 40, Color.BLACK);
+		draw.render();
+		draw.clear();
 		int tweetWeek = tweetWeek(j);
 		System.out.println("As you can see "+tweetWeek+ " had by far the most tweets with "+ yCoordinate(tweetWeek, j)+" tweets!");
 		
@@ -229,7 +234,7 @@ public class FinalProject2{
 					tweetWeek = i;
 					//System.out.println("In the loop!");
 			}//checks if the array list contains anything larger than the value of the week under question and if it does it replaces that as the "reigning" tweetWeek
-			System.out.println("i ="+ i);
+			//System.out.println("i ="+ i);
 		}
 		
 		//System.out.println("Function Complete!");
