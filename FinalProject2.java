@@ -23,8 +23,8 @@ import org.dalton.DaltonDraw;
  *
  */
 
-class TweetCats{//short for tweet categories
-
+class TweetCats{// Short for tweet categories
+	// Define variables
 	int num;
 	String timeSent;
 	int favCount;
@@ -34,7 +34,6 @@ class TweetCats{//short for tweet categories
 	int retweetCount;
 	String source;
 	String text;
-
 
 }
 
@@ -54,14 +53,10 @@ public class FinalProject2{
 
 				String[] data = scan.nextLine().split(",");
 
-				/*for(int i = 0; i < data.length; i++){
-					System.out.println(data[i]);
-				}*/
-
 				if(data[4].equals("")){
 					data[4] = "0";
 				}
-
+				// Initialize variables
 				TweetCats t = new TweetCats();
 				t.num = Integer.parseInt(data[0]);
 				t.timeSent = data[1];
@@ -90,6 +85,7 @@ public class FinalProject2{
 	}
 
 	public static void main(String[] args){
+		// Define variables in main
 		TweetCats[] j = fillArray();
 		Random ran = new Random();
 		int i = ran.nextInt(5000);
@@ -97,7 +93,7 @@ public class FinalProject2{
 		int yCoord = 0;
 
 		Scanner scan = new Scanner(System.in);
-
+		// Initialize Dalton Draw
 		DaltonDraw draw = new DaltonDraw();
 		DaltonDraw occurence = new DaltonDraw();
 
@@ -111,13 +107,16 @@ public class FinalProject2{
 
 
 		draw.drawString("Graphing Please Wait!",70, 300, 50, Color.BLACK);
+		draw.drawString("(this will take about 50 seconds)", 40, 350, 50, Color.BLACK);
 		draw.render();//tells user to wait
 		draw.clear();//preps message to be cleared when the graph is ready.
 
 
-		//origin of this graph at 50, 550
-		draw.drawRect(1, 500, 100, 50, 0, Color.BLACK);
+		// Origin of this graph at 50, 550
+		// Set up graph axes
+		draw.drawRect(1, 500, 100, 50, 0, Color.BLACK); 
 		draw.drawRect(1, 500, 350, 300, 90, Color.BLACK);
+		// Label graph axes
 		for(int y = 540; y > 100.0; y -= 5){
 			if((540-y)%20 != 0){
 				draw.drawRect(3, 1, 97, y, 0, Color.BLACK);
@@ -136,11 +135,7 @@ public class FinalProject2{
 				draw.drawString(""+(x-105), x-7, 570, 10, Color.BLACK);
 			}
 		}
-
-
-		//draw.render();
-
-		//System.out.println("Graphing Please Wait!");
+		// Graph tweet frequency
 		for(int m = 0; m < 415.0; m++){
 			xCoord = m+100;
 			yCoord = 550 - (yCoordinate(m, j));
@@ -149,7 +144,7 @@ public class FinalProject2{
 		}
 
 
-
+		// Report findings
 		draw.drawString("As you can see "+tweetWeek+ " had by far the most tweets with "+ yCoordinate(tweetWeek, j)+" tweets!", 500, 20, 15, Color.BLACK);
 		draw.drawString("Week Since First Tweet", 250, 600, 15, Color.BLACK);
 		draw.drawString("Number", 5, 300, 15, Color.BLACK);
@@ -160,17 +155,6 @@ public class FinalProject2{
 		 
 
 		// Graph word occurences
-		// User enters word to find
-
-		/* Allowed us to check that the variable types lined up correctly
-		System.out.println("Id: "+j[700].id);
-		System.out.println("num: "+j[700].num);
-		System.out.println("replyToUserID: "+j[700].replyToUserID);
-		System.out.println("retweetCount: "+j[700].retweetCount);
-		System.out.println("source: "+j[700].source);
-		System.out.println("text: "+j[700].text);
-		System.out.println("timeSent: "+j[700].timeSent);
-		*/
 		
 		occurence.drawString("Please go to the Terminal!", 20, 300, 50, Color.BLACK);
 		occurence.render();
@@ -181,9 +165,11 @@ public class FinalProject2{
 		occurence.render();
 		occurence.clear();
 		
-		//origin of this graph at 50, 550
+		// Origin of this graph at 50, 550
+		// Set up graph axes
 		occurence.drawRect(1, 500, 100, 50, 0, Color.BLACK);
 		occurence.drawRect(1, 500, 350, 300, 90, Color.BLACK);
+		// Label graph axes
 		for(int y = 540; y > 100.0; y -= 5){
 			if((540-y)%20 != 0){
 				occurence.drawRect(3, 1, 97, y, 0, Color.BLACK);
@@ -219,32 +205,26 @@ public class FinalProject2{
 		System.out.println("     1) In our main graph, as you saw, the week with the most tweets was week #295. This represents Mid-Late December.\n     This was concurrent with two major events. The first was Trump's final Ms. Universe Pageant. \n     However, suprisingly enough this was not what most of the talk was about. A lot of the tweets were talking about Trump running for president. \n     This was coming on the heels of Obama's announcement of loosening the travel ban on Cuba.");
 		System.out.println("     2) In a graph about Trump's references to the word President, the time when he references him most is not when you would expect. It wasn't 2016 or 2012 but rather April, May and June of 2015. \n     These were the months leading up to his campaign.");
 		
-		
-		/*
-		System.out.println(daysSince(i, j));
-		System.out.println(calcWeek(30195, j));
-		System.out.println(yCoordinate(171.0, j));
-		 */
-		
 	}
 
 	public static double daysSince(int i, TweetCats[] j){
-		double secondsSince = 0.00;
+		// Initialize function variables
+		double daysSince = 0.00;
 		double daysToMonth = 0;
 		double daysToYear = 0;
-
+		// Split time into individual units (year, month, day, hour, minute, second)
 		String[] bigTsmallT = j[i].timeSent.split(" ");
 		String[] bigTime = bigTsmallT[0].split("-");
 		String[] smallTime = bigTsmallT[1].split(":");
 		ArrayList<Double> time = new ArrayList();
-
+		
 		for(int z = 0; z < bigTime.length; z++){
 			time.add(Double.parseDouble(bigTime[z]));
 		}//convert times to ints
 		for(int z = 0; z < smallTime.length; z++){
 			time.add(Double.parseDouble(smallTime[z]));
 		}//convert string times to ints
-
+		// Account for variation in days per month
 		if(time.get(1) == 1){
 			daysToMonth = 0;
 		}
@@ -280,20 +260,19 @@ public class FinalProject2{
 		}
 		else if(time.get(1) == 12){
 			daysToMonth = 334;
-		}//calculate months
+		}
+		// Calculate days since
+		daysSince = ((time.get(0)*365) + (daysToMonth) + (time.get(2)) + (time.get(3)/24) + (time.get(4)/1440) + (time.get(5)/86400)) - 733409.75;
 
-		secondsSince = ((time.get(0)*365) + (daysToMonth) + (time.get(2)) + (time.get(3)/24) + (time.get(4)/1440) + (time.get(5)/86400)) - 733409.75;
-
-		//System.out.println("i = "+i);
-
-		return secondsSince;
+		return daysSince;
 	}
 	public static double calcWeek(int i, TweetCats[] j){
+		// Initialize function variables
 		double week = 0;
 		double day;
-
+		// Calculate days since
 		day = daysSince(i, j);
-
+		// Convert from days to weeks via rounding
 		day -= (day%7);
 
 		week = day/7;
@@ -301,8 +280,9 @@ public class FinalProject2{
 		return week;
 	}
 	public static int yCoordinate(double week, TweetCats[] j){
+		// Initialize function variable
 		int yCoord = 0;
-
+		// Count tweets per week
 		for(int i = 0; i < j.length; i++){
 			if(calcWeek(i, j) == week){
 				yCoord++;
@@ -312,26 +292,22 @@ public class FinalProject2{
 		return yCoord;
 	}
 	public static int tweetWeek(TweetCats[] j){
+		// Initialize function variable
 		int tweetWeek = 0;
-
-		//ArrayList<Integer> mostWeek = new ArrayList();
-
-		//System.out.println("Starting the funtion! YEA");
-		//415.0 is the total number of weeks since trumps first tweet
+		
+		// Checks if the current week has more tweets than the "reigning" top tweet week
 		for(int i = 0; i <= 415.0; i++){
 			if(yCoordinate(i, j) > yCoordinate(tweetWeek, j)){
 				tweetWeek = i;
-				//System.out.println("In the loop!");
-			}//checks if the array list contains anything larger than the value of the week under question and if it does it replaces that as the "reigning" tweetWeek
-			//System.out.println("i ="+ i);
+			}
 		}
-
-		//System.out.println("Function Complete!");
 		return tweetWeek;
 	}
 	public static int yCoordinateWord(double week, TweetCats[] j, String word) {
+		// Initialize function variable
 		int yCoord = 0;
-
+		
+		// Count occurences per week of given word
 		for (int i = 0; i < j.length; i++) {
 			if (calcWeek(i, j) == week && j[i].text.contains(word) || calcWeek(i, j) == week && j[i].text.contains(word.toLowerCase()) || calcWeek(i, j) == week && j[i].text.contains("@"+word)) {
 				yCoord++;
