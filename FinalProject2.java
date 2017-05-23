@@ -74,8 +74,11 @@ public class FinalProject2{
 		int i = ran.nextInt(5000);
 		int xCoord = 0;
 		int yCoord = 0;
+		
+		Scanner scan = new Scanner(System.in);
 
 		DaltonDraw draw = new DaltonDraw();
+		DaltonDraw occurence = new DaltonDraw();
 		
 		
 		draw.drawString("Please Wait Making", 120, 250, 40, Color.BLACK);
@@ -123,6 +126,20 @@ public class FinalProject2{
 			draw.drawRect(2, 2, xCoord, yCoord, 0, Color.BLACK);
 			//System.out.println("("+xCoord+", "+yCoord+")");
 		}
+		
+		// Graph word occurences
+
+				// User enters word to find
+				System.out.println("What word would you like to search for?");
+				String word = scan.nextLine();
+				// Records and graphs occurences of the chosen word
+				for (int m = 0; m < 415.0; m++) {
+					xCoord = m + 50;
+					yCoord = 550 - (yCoordinateWord(m, j, word));
+					occurence.drawRect(2, 2, xCoord, yCoord, 0, Color.BLACK);
+				}
+				
+				occurence.render();
 		
 		draw.drawString("Week Since First Tweet", 250, 600, 15, Color.BLACK);
 		draw.drawString("Number", 5, 300, 15, Color.BLACK);
@@ -240,4 +257,15 @@ public class FinalProject2{
 		//System.out.println("Function Complete!");
 		return tweetWeek;
 	}
+	public static int yCoordinateWord(double week, TweetCats[] j, String word) {
+		int yCoord = 0;
+
+		for (int i = 0; i < j.length; i++) {
+			if (calcWeek(i, j) == week && j[i].text.contains(word)) {
+				yCoord++;
+			}
+		}
+		return yCoord;
+	}
 }
+
